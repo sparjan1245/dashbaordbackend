@@ -52,7 +52,7 @@ app.use(limiter);
 
 // Enable CORS
 app.use(cors({
-  origin: 'https://dashbaordbackend.onrender.com', // must match your frontend origin exactly
+  origin: 'https://dashbaordfrontend.onrender.com', // must match your frontend origin exactly
   credentials: true
 }));
 
@@ -66,5 +66,6 @@ app.use("/api/v1/modules", fieldRoutes);
 app.use(errorHandler);
 
 module.exports = app;
+
 
 
