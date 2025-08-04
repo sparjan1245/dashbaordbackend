@@ -1,0 +1,21 @@
+name: Deploy Backend API to Render
+
+on:
+  push:
+    branches:
+      - main  # Change if you deploy from a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST https://api.render.com/v1/services/${{ secrets.SERVICE_ID }}/deploys \
+            -H 'Accept: application/json' \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -d '{}'
