@@ -3,6 +3,11 @@ const app = express();
 
 const morgan = require('morgan');
 const cors = require('cors');
+app.use(cors({
+  origin: "*", // For dev, or use specific domain like "https://yourfrontend.onrender.com"
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
@@ -61,3 +66,4 @@ app.use("/api/v1/modules", fieldRoutes);
 app.use(errorHandler);
 
 module.exports = app;
+
