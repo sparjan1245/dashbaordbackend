@@ -26,27 +26,19 @@ if (process.env.NODE_ENV === 'development') {
 
 // Set security headers
 app.use(helmet());
-// Allow CORS from your frontend
 
 // Body parser
 app.use(express.json());
-
-// Sanitize data
-
-// Prevent XSS attacks
 
 // Prevent http param pollution
 app.use(hpp());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 mins
+  windowMs: 10 * 60 * 1000,
   max: 100
 });
 app.use(limiter);
-
-// Enable CORS
-
 
 // Mount routers
 app.use('/api/v1/auth', authRoutes);
@@ -58,6 +50,3 @@ app.use("/api/v1/modules", fieldRoutes);
 app.use(errorHandler);
 
 module.exports = app;
-
-
-
