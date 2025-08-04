@@ -4,9 +4,8 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 app.use(cors({
-  origin: "*", // For dev, or use specific domain like "https://yourfrontend.onrender.com"
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  origin: 'https://dashbaordfrontend.onrender.com', // must match your frontend origin exactly
+  credentials: true
 }));
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -27,11 +26,6 @@ if (process.env.NODE_ENV === 'development') {
 // Set security headers
 app.use(helmet());
 // Allow CORS from your frontend
-app.use(cors({
-  origin: "*", // For dev, or use specific domain like "https://yourfrontend.onrender.com"
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
 
 // Body parser
 app.use(express.json());
@@ -51,10 +45,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Enable CORS
-app.use(cors({
-  origin: 'https://dashbaordfrontend.onrender.com', // must match your frontend origin exactly
-  credentials: true
-}));
+
 
 // Mount routers
 app.use('/api/v1/auth', authRoutes);
@@ -66,6 +57,7 @@ app.use("/api/v1/modules", fieldRoutes);
 app.use(errorHandler);
 
 module.exports = app;
+
 
 
 
