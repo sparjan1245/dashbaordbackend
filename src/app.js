@@ -21,6 +21,12 @@ if (process.env.NODE_ENV === 'development') {
 
 // Set security headers
 app.use(helmet());
+// Allow CORS from your frontend
+app.use(cors({
+  origin: "*", // For dev, or use specific domain like "https://yourfrontend.onrender.com"
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // Body parser
 app.use(express.json());
